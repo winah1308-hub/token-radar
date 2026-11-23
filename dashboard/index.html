@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — pre-token protocols ranked by implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">TOKEN LAUNCH RADAR</p>
+    <h1>Which pre-token protocol is worth farming next?</h1>
+    <p class="lede">Every protocol below records no token in the snapshot, ranked by what a token would be worth if the protocol's record stayed as it is. The value is fitted from the live-token protocols in the same snapshot — not from a hand-kept list of names. It is this entry's own claim, never a prediction that a token will be issued.</p>
+    <dl class="stats" id="stats"></dl>
+  </div>
+</header>
+<nav class="tabs wrap" aria-label="Views">
+  <button data-view="board" class="on" type="button">Board</button>
+  <button data-view="live" type="button">Live tokens</button>
+  <button data-view="model" type="button">How the model works</button>
+</nav>
+<main class="wrap">
+  <section id="view-board">
+    <div class="controls" role="search">
+      <label>Search <input id="q" type="search" placeholder="name, slug or category" autocomplete="off"></label>
+      <label>Category <select id="cat"><option value="">All categories</option></select></label>
+      <label>Chain <select id="chain"><option value="">All chains</option></select></label>
+      <label>Scope <select id="scope"><option value="all">All 191 ranked</option><option value="watchlist">Watchlist only</option><option value="early">Early only</option></select></label>
+      <label>Min TVL <select id="minTvl"><option value="0">Any</option><option value="10000000">$10M</option><option value="50000000">$50M</option><option value="100000000">$100M</option><option value="1000000000">$1B</option></select></label>
+      <p class="count" id="count" aria-live="polite"></p>
+    </div>
+    <div id="detail" class="detail" hidden></div>
+    <div class="tablewrap">
+      <table id="board">
+        <thead><tr>
+          <th data-sort="rank">Rank</th><th data-sort="name">Protocol</th><th data-sort="category">Category</th>
+          <th data-sort="chains">Chains</th><th data-sort="tvl_usd">TVL</th><th data-sort="change_7d">7d</th>
+          <th data-sort="age_days">Age</th><th data-sort="implied_value_usd">Implied value</th><th>Badge</th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p class="hint">Click a column header to sort. Click any row to open its detail: the model breakdown, the six farm steps, and how it compares with live tokens.</p>
+  </section>
+  <section id="view-live" hidden>
+    <h2>Live tokens — the market's own values</h2>
+    <p>These protocols already trade, so they are <strong>not</strong> ranked on the board. They are the comparison set the model learned from: each row shows the market cap the market actually gives it, and its market-cap-to-TVL multiple. A pre-token protocol's implied value is priced on the same terms.</p>
+    <div class="tablewrap"><table id="liveTable">
+      <thead><tr><th>Protocol</th><th>Category</th><th>Chains</th><th>TVL</th><th>Market cap</th><th>MCap / TVL</th></tr></thead>
+      <tbody id="liveRows"></tbody>
+    </table></div>
+  </section>
+  <section id="view-model" hidden>
+    <h2>How the model works</h2>
+    <div id="modelText"></div>
+  </section>
+</main>
+<footer class="wrap">
+  <p>Data: DefiLlama protocol snapshot, as of <span id="asof"></span>. The snapshot records no token for the board's protocols; that is the record, not proof they have none. Implied values are this entry's own claim, fitted from the snapshot, and are not a prediction of issuance, timing or price. Farming costs real gas and carries real risk — never farm with money you cannot lose.</p>
+</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
